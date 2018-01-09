@@ -17,7 +17,7 @@ import com.demo.service.CartService;
 
 /**
 Controller class used to map incoming client requests to service layer.
-FrontEndController design pattern using auto configured DispatcherServlet(using SpringBoot autoconfiguration).
+FrontController design pattern using auto configured DispatcherServlet(using SpringBoot autoconfiguration).
 The auto configured DispatcherServlet will have mappings to all service URLs.
 */
 
