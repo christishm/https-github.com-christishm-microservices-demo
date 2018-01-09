@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" 
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+        <div>
+         <h1>Cart Details Page</h1>
+           <span>PRODUCT-ID:</span>
+           <span>PRODUCT-QTY:</span>
+           <span>PRODUCT-PRICE:</span>
+           <span>STOCK-INFO:</span>
+        </div>
+        <div>
+        	 <span id="productId" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	 <input type="text" name="product-qty" id="qty"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	 <span id="price"/>&nbsp;&nbsp;&nbsp;
+        	 <span id="stock-info"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	 <span id="update-btn"><button type="button">UPDATE</button></span>
+        	 <span id="delete-btn"><button type="button">DELETE</button></span>  
+       	</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" th:src="@{/js/jquery-1.11.0.min.js}" />
+<script type="text/javascript">
+             //Calling cart microservice, price-info microservice, inventory-info microservice
+             // to populate cart details
+             $.getJSON("/cart-service/cart-details", function(result){
+        	        $.each(result, function(i, field){
+        	        	$("#productId").html(field.productId);
+        	        	$("#qty").val(field.quantity);
+        	        	$.getJSON("/price-info/"+field.productId,function(result){
+        	         		$("#price").html(result.priceInfo);
+        		        });
+        	        	$.getJSON("/inventory-info/"+field.productId,function(result){
+        	         		$("#stock-info").html(result.inventoryStatus);
+        		        });
+        	        });
+        	    }); 
+             
+             
+             $("#update-btn").click(function(){
+            	   //calling cart microservice to update cart - POST request
+            	    $.post("/cart-service/update-cart/"+$("#productId").html()+"/"+$("#qty").val(), function(result){
+            	   	    	$.getJSON("/cart-service/cart-details", function(result){
+                	        $.each(result, function(i, field){
+                	        	$("#productId").html(field.productId);
+                	        	$("#qty").html(field.quantity);
+                	        });
+                	    });
+            	    	
+            	    });
+            	});
+             
+             $("#delete-btn").click(function(){
+         	    //calling cart microservice to delete cart - POST request
+         	    $.post("/cart-service/delete-cart/"+$("#productId").html(), function(result){
+         	   	    	$.getJSON("/cart-service/cart-details", function(result){
+             	        $.each(result, function(i, field){
+             	        	$("#productId").html(field.productId);
+             	        	$("#qty").html(field.quantity);
+             	        });
+             	    });
+         	    	
+         	    });
+         	});
+ </script>
+</body>
+</html>

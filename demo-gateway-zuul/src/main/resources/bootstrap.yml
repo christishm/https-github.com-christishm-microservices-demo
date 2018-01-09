@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: demo-gateway-zuul
+  cloud:
+    config:
+      uri: http://localhost:8001
+      
+
+    
+    

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: inventory-info
+  cloud:
+    config:
+      uri: http://localhost:8001
+server:
+  port: ${PORT:${SERVER_PORT:0}}
