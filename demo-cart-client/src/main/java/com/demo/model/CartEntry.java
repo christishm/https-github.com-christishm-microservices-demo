@@ -7,6 +7,12 @@ import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+/**
+Domain object representing CartEntry. This class will be used to persist and fetch CartEntry data from 
+persistence layer using JPA implemention.
+Design pattern used:Domain Model pattern.
+*/
+
 @Entity
 public class CartEntry {
 	
