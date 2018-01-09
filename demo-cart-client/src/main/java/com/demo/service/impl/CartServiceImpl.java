@@ -20,11 +20,18 @@ import com.demo.model.CartEntry;
 import com.demo.model.CartModel;
 import com.demo.service.CartService;
 
+/**
+Service class used to support all the Cart operations.
+The controller class in the MVC layer invokes the appropiate method in this class to execute business logic.
+Design pattern used:Service Layer Pattern
+Also @Autowired annotation uses Dependecy injection pattern to inject dependencies.
+*/
 
 @Service
 public class CartServiceImpl implements CartService{
 	
 	public static Logger log = LoggerFactory.getLogger(CartServiceImpl.class);
+	
 	
 	@Autowired
 	private CartEntryRepository cartEntryRepository;
