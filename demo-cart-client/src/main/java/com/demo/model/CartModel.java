@@ -12,6 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+/**
+Domain object representing CartModel. This class will be used to persist and fetch CartModel data from 
+persistence layer using JPA implemention.
+Design pattern used:Domain Model pattern.
+*/
+
 
 @Entity
 public class CartModel {
